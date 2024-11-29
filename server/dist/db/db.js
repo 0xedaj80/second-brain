@@ -23,7 +23,7 @@ var __importStar = (this && this.__importStar) || function (mod) {
     return result;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.userModel = exports.contentModel = void 0;
+exports.userModel = exports.linkModel = exports.contentModel = void 0;
 const mongoose_1 = __importStar(require("mongoose"));
 const mongoose_2 = require("mongoose");
 const UserSchema = new mongoose_2.Schema({
@@ -36,5 +36,10 @@ const ContentSchema = new mongoose_2.Schema({
     tags: [{ type: mongoose_1.default.Types.ObjectId, ref: "Tag" }],
     userId: { type: mongoose_1.default.Types.ObjectId, ref: "User", required: true }
 });
+const LinkSchema = new mongoose_2.Schema({
+    hash: String,
+    userId: { type: mongoose_1.default.Types.ObjectId, ref: "User", required: true }
+});
 exports.contentModel = (0, mongoose_1.model)("Content", ContentSchema);
+exports.linkModel = (0, mongoose_1.model)("Link", LinkSchema);
 exports.userModel = (0, mongoose_1.model)("User", UserSchema);

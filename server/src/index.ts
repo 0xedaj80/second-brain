@@ -4,7 +4,7 @@ dotenv.config()
 import express from "express" 
 import mongoose from "mongoose";
 import jwt from "jsonwebtoken"
-import { contentModel, userModel } from "./db/db";
+import { contentModel, linkModel, userModel } from "./db/db";
 import { jwt_password } from "./config";
 import { authenticatejwt } from "./middleware/auth";
 
@@ -108,8 +108,81 @@ app.delete("/api/v1/content", authenticatejwt, async (req,res)=>{
       })
 })
 
-app.post("/api/v1/brain/share", (req,res)=>{
+function random(n:number):String{
+    let options = "laksdfjlajdfjasdlfja;dsl"
+    let len = options.length;
+    let ans = "";
+    for(let i = 0; i<len; ++i){
+         ans+=options[ Math.floor((Math.random()*len)) ]
+    } 
+    return ans;
+}
+
+app.post("/api/v1/brain/share", authenticatejwt, async (req,res)=>{
+    const share = req.body.share;
+    if (share) {
+            const existingLink = await linkModel.findOne({
+                userId: req.userId
+            });
+
+            if (existingLink) {
+                res.json({
+                    hash: existingLink.hash
+                })
+                return;
+            }
+            const hash = random(10);
+            await linkModel.create({
+                userId: req.userId,
+                hash: hash
+            })
+
+            res.json({
+                hash
+            })
+    } else {
+        await linkModel.deleteOne({
+            userId: req.userId
+        });
+
+        res.json({
+            message: "Removed link"
+        })
+    } 
+})
+
+app.get("/api/v1/brain/:shareLink", async (req,res)=>{
+     const hash = req.params.shareLink;
      
+    const links = await linkModel.findOne({
+          hash:hash 
+     }) 
+
+     if(!links){
+         res.status(411).json({
+             message:"sorry incorrect input"
+         })
+       return; 
+        }
+    
+     const content = await contentModel.find({
+         userId:links.userId
+     })
+      
+     const username = await userModel.findOne({
+         _id:links.userId
+     })
+     
+    if(!username){
+         res.status(411).json({
+             message:"user not found, fuck ya "
+         })
+    } 
+     res.json({
+          username:username?.username,
+         content:content
+     })
+
 })
 
 

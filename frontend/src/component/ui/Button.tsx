@@ -14,7 +14,7 @@ const VariantStyles = {
     "secondary":"bg-purple-300 text-purple-600"
 }
 
-const defaultstyles = "rounded-lg flex hover:bg-red-100"
+const defaultstyles = "rounded-lg flex hover:bg-red-100 font-normal items-center"
 
 
 const sizeStyles = { 

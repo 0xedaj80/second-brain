@@ -14,7 +14,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const dotenv_1 = __importDefault(require("dotenv"));
 dotenv_1.default.config();
-// dotenv.config({ path: __dirname+'/.env' });
 const express_1 = __importDefault(require("express"));
 const mongoose_1 = __importDefault(require("mongoose"));
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
@@ -98,8 +97,72 @@ app.delete("/api/v1/content", auth_1.authenticatejwt, (req, res) => __awaiter(vo
         msg: "content deleted"
     });
 }));
-app.post("/api/v1/brain/share", (req, res) => {
-});
+function random(n) {
+    let options = "laksdfjlajdfjasdlfja;dsl";
+    let len = options.length;
+    let ans = "";
+    for (let i = 0; i < len; ++i) {
+        ans += options[Math.floor((Math.random() * len))];
+    }
+    return ans;
+}
+app.post("/api/v1/brain/share", auth_1.authenticatejwt, (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const share = req.body.share;
+    if (share) {
+        const existingLink = yield db_1.linkModel.findOne({
+            userId: req.userId
+        });
+        if (existingLink) {
+            res.json({
+                hash: existingLink.hash
+            });
+            return;
+        }
+        const hash = random(10);
+        yield db_1.linkModel.create({
+            userId: req.userId,
+            hash: hash
+        });
+        res.json({
+            hash
+        });
+    }
+    else {
+        yield db_1.linkModel.deleteOne({
+            userId: req.userId
+        });
+        res.json({
+            message: "Removed link"
+        });
+    }
+}));
+app.get("/api/v1/brain/:shareLink", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const hash = req.params.shareLink;
+    const links = yield db_1.linkModel.findOne({
+        hash: hash
+    });
+    if (!links) {
+        res.status(411).json({
+            message: "sorry incorrect input"
+        });
+        return;
+    }
+    const content = yield db_1.contentModel.find({
+        userId: links.userId
+    });
+    const username = yield db_1.userModel.findOne({
+        _id: links.userId
+    });
+    if (!username) {
+        res.status(411).json({
+            message: "user not found, fuck ya "
+        });
+    }
+    res.json({
+        username: username === null || username === void 0 ? void 0 : username.username,
+        content: content
+    });
+}));
 function main() {
     return __awaiter(this, void 0, void 0, function* () {
         yield mongoose_1.default.connect(process.env.MONGO_URL);
