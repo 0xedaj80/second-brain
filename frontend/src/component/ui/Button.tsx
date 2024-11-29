@@ -14,7 +14,7 @@ const VariantStyles = {
     "secondary":"bg-purple-300 text-purple-600"
 }
 
-const defaultstyles = "rounded-lg flex hover:bg-red-100 font-normal items-center"
+const defaultstyles = "rounded-lg flex hover:bg-blue-600 font-normal items-center"
 
 
 const sizeStyles = { 
@@ -26,6 +26,6 @@ const sizeStyles = {
 
 export function Button(props:ButtonProps) {
      return (
-        <button className={`${VariantStyles[props.variant]} ${defaultstyles} ${sizeStyles[props.size]}`} >{props.startIcon ? <div className="pr-2 m-1">{props.startIcon}</div>:null}{props.text}{props.endIcon}</button>
+        <button onClick={props.onClick} className={`${VariantStyles[props.variant]} ${defaultstyles} ${sizeStyles[props.size]}`} >{props.startIcon ? <div className="pr-2 m-1">{props.startIcon}</div>:null}{props.text}{props.endIcon}</button>
      )
 }
