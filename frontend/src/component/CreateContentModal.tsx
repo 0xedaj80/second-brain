@@ -1,8 +1,39 @@
 import { CloseIcon } from "./icons/CloseIcon";
 import { Button } from "./ui/Button";
+import { Input } from "./Input";
+import { useRef, useState } from "react";
+import axios from "axios";
+import { BACKEND_URL } from "../config";
+
+
+
+enum ContentType {
+    Youtube = "youtube",
+     Twitter = "twitter"
+}
 
 export function CreateContentModal({open, onClose}){
+   const linkRef = useRef<HTMLInputElement>()
+   const titleRef = useRef<HTMLInputElement>()
+   const [type, settype] = useState(ContentType.Youtube);
 
+    async function content(){
+       const link = linkRef.current?.value;
+       const title = titleRef.current?.value;
+       await axios.post(`${BACKEND_URL}/api/v1/content`,{
+         link,
+         title,
+         type
+       },{
+          headers:{
+             "Authorization":localStorage.getItem("token")
+          } 
+       })
+        
+       onClose();
+       
+
+   }
      return (
         <div>
         { open && <div className="w-screen h-screen bg-black  fixed top-0 left-0 bg-opacity-60 flex justify-center"> 
@@ -15,11 +46,22 @@ export function CreateContentModal({open, onClose}){
 
                  </div> 
                  <div className="">
-                    <Input placeholder={"Title"}></Input>
-                    <Input placeholder={"Link"}></Input>
+                    <Input  reference={titleRef} placeholder={"Title"}></Input>
+                    <Input  reference={linkRef} placeholder={"Link"}></Input>
                  </div> 
+                <div >
+                  <h1>Type:</h1> 
+                  <div className="flex gap-4 pl-8 p-2">
+                <Button size="md" text="Youtube"  variant={ type === ContentType.Youtube ?"primary":"secondary"}  onClick={()=>{
+                  settype(ContentType.Youtube)
+                }}></Button>
+                <Button size="md" text="Twitter" variant={ type === ContentType.Twitter ?"primary":"secondary"} onClick={()=>{
+                   settype(ContentType.Twitter)
+                }} ></Button>
+                </div>
+                </div>
                  <div className="flex justify-center">                    
-                 <Button variant={"primary"} text={"submit"} size="md"></Button>
+                 <Button onClick={content} variant={"primary"} text={"submit"} size="md"></Button>
                  </div>
              </span>
                </div>
@@ -31,10 +73,3 @@ export function CreateContentModal({open, onClose}){
 }  
 
 
-function Input({placeholder}){
-     return (
-        <div className="">
-            <input type="text" placeholder={placeholder} className="px-4 py-2 border rounded m-2 " />
-        </div>
-     )
-}

@@ -5,8 +5,13 @@ import { Sidebar } from "../component/Sidebar";
 import { Button } from "../component/ui/Button";
 import { CreateContentModal } from "../component/CreateContentModal";
 import { useState } from "react";
+import { useContent } from "../hooks/useContent";
+import { Link } from "react-router-dom";
+import axios from "axios";
+import { BACKEND_URL } from "../config";
 function Dashboard() {
    const [MoldalOpen, setModalOpen] = useState(false)
+   const content = useContent()
   return (
     <div >
       <Sidebar></Sidebar> 
@@ -26,58 +31,32 @@ function Dashboard() {
             }}
           ></Button>
           <Button
+            onClick={async ()=>{
+                const response = await axios.post(`${BACKEND_URL}/api/v1/brain/share`,{
+                   share:true
+                },{
+                   headers:{
+                     "Authorization":localStorage.getItem("token")
+                   }
+                }
+               )
+               const shareUrl = `${BACKEND_URL}${response.data.hash}` 
+               alert(shareUrl)
+            }}
             startIcon={<ShareIcon size={"lg"}></ShareIcon>}
             variant={"secondary"}
             text={"Share Brain"}
             size={"md"}
           ></Button>
         </div>
-        <div className="flex gap-4 p-3 flex-wrap ">
-          <Card
-            type={"twitter"}
-            link={"https://x.com/0xedaj80/status/1793715475198972141"}
-            title={"tweet"}
-          ></Card>
-          <Card
-            type={"youtube"}
-            link={"https://www.youtube.com/watch?v=JsnMmOG14QI"}
-            title={"first video"}
-          ></Card>
-          <Card
-            type={"twitter"}
-            link={"https://x.com/0xedaj80/status/1793715475198972141"}
-            title={"tweet"}
-          ></Card>
-          <Card
-            type={"youtube"}
-            link={"https://www.youtube.com/watch?v=JsnMmOG14QI"}
-            title={"first video"}
-          ></Card>
-          <Card
-            type={"twitter"}
-            link={"https://x.com/0xedaj80/status/1793715475198972141"}
-            title={"tweet"}
-          ></Card>
-          <Card
-            type={"youtube"}
-            link={"https://www.youtube.com/watch?v=JsnMmOG14QI"}
-            title={"first video"}
-          ></Card>
-          <Card
-            type={"youtube"}
-            link={"https://www.youtube.com/watch?v=JsnMmOG14QI"}
-            title={"first video"}
-          ></Card>
-          <Card
-            type={"twitter"}
-            link={"https://x.com/0xedaj80/status/1793715475198972141"}
-            title={"tweet"}
-          ></Card>
-          <Card
-            type={"youtube"}
-            link={"https://www.youtube.com/watch?v=JsnMmOG14QI"}
-            title={"first video"}
-          ></Card>
+        <div className="flex gap-4 p-3 flex-wrap "> 
+            {content.map(({type,title,link})=>(
+              <Card
+            type={type}
+            link={link}
+            title={title}
+          ></Card> 
+            ))}
         </div>
       </div>
     </div>
