@@ -3,13 +3,18 @@ import { ShareIcon } from "./icons/ShareIcon";
 import { LinkIcon } from "./icons/LinkIcon";
 import { YoutubeIcon } from "./icons/YoutubeIcon";
 import { TwitterIcon } from "./icons/TwitterIcon";
+import { DeleteIcon } from "./icons/DeleteIcon";
+import { EditIcon } from "./icons/EditIcon";
 interface CardProps{
      title:string;
      link:string;
-     type:"twitter" | "youtube" 
+     type:"twitter" | "youtube" ;
+     id:string;
+     setDeleteOpen:any;
+     setContentId:any;
 }
 
-export function Card({title,link,type}:CardProps) {
+export function Card({title,link,type,id,setDeleteOpen,setContentId}:CardProps) {
   return (
     <div>
       <div className=" p-4 max-w-72 text-md border  bg-white rounded-md shadow-md border-gray-200">
@@ -28,14 +33,22 @@ export function Card({title,link,type}:CardProps) {
             <a href={link} target="_blank">
             <LinkIcon size={"lg"}></LinkIcon></a> 
             </div>
-            <div className="pr-2 text-gray-500">
-              <ShareIcon size={"lg"}></ShareIcon>
+            <div  className="pr-2 text-gray-500   hover:bg-gray-200 cursor-pointer rounded-md p-1">
+             <button onClick={()=>{
+                  setContentId(id)
+                 setDeleteOpen((e) => (!e))
+             }}>
+              <DeleteIcon size={"lg"}></DeleteIcon>
+              </button>  
+            </div>
+            <div className="pr-2 text-gray-500  hover:bg-gray-200 cursor-pointer rounded-md p-1">
+               <EditIcon size={"lg"}></EditIcon>
             </div>
           </div>
         </div>
       <div className="pt-4 "> 
 
-        {type === "youtube" && <iframe
+        {type === "youtube" && link ? (<iframe
            className="w-full rounded-md" 
           src={link.replace("watch","embed").replace("?v=","/")}
           title="YouTube video player"
@@ -43,7 +56,7 @@ export function Card({title,link,type}:CardProps) {
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
           referrerPolicy="strict-origin-when-cross-origin"
           allowFullScreen
-        ></iframe> }
+        ></iframe> ) :null}
 
        {type === "twitter" && <blockquote className="twitter-tweet">
        <a href={link.replace("x.com", "twitter.com")}></a> 

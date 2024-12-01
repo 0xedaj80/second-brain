@@ -76,8 +76,9 @@ app.post("/api/v1/content", authenticatejwt, async (req,res)=>{
          userId:req.userId,
          tags:[]
     })
+    
     res.json({
-         msg:"content added"
+         msg:"content added not yet babe"
     }) 
 
 })
@@ -96,11 +97,9 @@ app.get("/api/v1/content" , authenticatejwt,  async (req,res)=>{
 })
 
 app.delete("/api/v1/content", authenticatejwt, async (req,res)=>{
-      const contentId = req.body.contentId;
-      
-      await contentModel.deleteMany({
-         contentId,
-        //  @ts-ignore
+      const contentId = req.body.contentId     
+      const result = await contentModel.deleteMany({
+          _id:contentId,
          userId:req.userId
       }) 
 

@@ -75,7 +75,7 @@ app.post("/api/v1/content", auth_1.authenticatejwt, (req, res) => __awaiter(void
         tags: []
     });
     res.json({
-        msg: "content added"
+        msg: "content added not yet babe"
     });
 }));
 app.get("/api/v1/content", auth_1.authenticatejwt, (req, res) => __awaiter(void 0, void 0, void 0, function* () {
@@ -90,9 +90,8 @@ app.get("/api/v1/content", auth_1.authenticatejwt, (req, res) => __awaiter(void 
 }));
 app.delete("/api/v1/content", auth_1.authenticatejwt, (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const contentId = req.body.contentId;
-    yield db_1.contentModel.deleteMany({
-        contentId,
-        //  @ts-ignore
+    const result = yield db_1.contentModel.deleteMany({
+        _id: contentId,
         userId: req.userId
     });
     res.json({

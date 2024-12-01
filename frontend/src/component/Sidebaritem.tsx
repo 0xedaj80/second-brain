@@ -6,10 +6,10 @@ export function SidebarItem({text,icon}:{
 }){
      return (
         <div className="flex text-gray py-2 hover:bg-blue-200 cursor-pointer rounded-md mr-10 pl-4 items-center ">
-          <div  className="pr-4">  
+          <div  className="pr-4 p-1">  
           {icon}
             </div>
-            <div className=" font-serif">                
+            <div className=" font-serif ">                
            {text}
                 </div> 
         </div>

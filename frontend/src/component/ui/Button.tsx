@@ -1,7 +1,7 @@
 
 
 export interface ButtonProps {
-   variant:"primary" | "secondary";
+   variant:"primary" | "secondary" | "danger";
    size:"sm" | "md" | "lg" ;
    text:string;
    startIcon?:any;
@@ -10,11 +10,12 @@ export interface ButtonProps {
 } 
 
 const VariantStyles = {
-    "primary":"bg-purple-600 text-white",
-    "secondary":"bg-purple-300 text-purple-600"
+    "primary":"bg-purple-600 text-white hover:bg-blue-600",
+    "secondary":"bg-purple-300 text-purple-600 hover:bg-blue-300",
+    "danger":"bg-red-300 text-text-600 w-[200px] hover:bg-red-400"
 }
 
-const defaultstyles = "rounded-lg flex hover:bg-blue-600 font-normal items-center"
+const defaultstyles = "rounded-lg flex   font-normal justify-center"
 
 
 const sizeStyles = { 
