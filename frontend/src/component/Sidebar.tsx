@@ -8,6 +8,7 @@ import { YoutubeIcon } from "./icons/YoutubeIcon";
 import { SidebarItem } from "./Sidebaritem";
 import { Button } from "./ui/Button";
 import { RiLogoutBoxRLine } from "react-icons/ri";
+import { toast } from "react-toastify";
 
 
 // export function Sidebar(){ 
@@ -56,11 +57,13 @@ export function Sidebar(){
                 <SidebarItem icon={<LinkIcon size="lgg"></LinkIcon>} text="all Links"></SidebarItem>
                 </div>
             </div>
-
+            
             {/* Footer Section */}
             <div className="pb-8 mr-9 flex justify-center px-10">
+                
                 <Button onClick={()=>{
                      localStorage.removeItem("token")
+                     toast.error("signed out")
                      navigate("/signin")
                 }} variant="danger" text="Log-out" startIcon={<RiLogoutBoxRLine></RiLogoutBoxRLine>} size="md"></Button>
             </div>

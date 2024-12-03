@@ -11,12 +11,15 @@ import axios from "axios";
 import { BACKEND_URL } from "../config";
 import { DeleteModal } from "../component/DeleteModal";
 import { HomeIcon } from "../component/icons/HomeIcon";
+import { useRecoilState } from "recoil";
+import { UserNameState } from "../recoil/atoms/username";
 function Dashboard() {
    const [MoldalOpen, setModalOpen] = useState(false)
    const [deleteOpen, setDeleteOpen] = useState (false)
    const [contentId, setcontentId] = useState("")  
    const content = useContent()
    const [sticky , setsticky] = useState(true)
+   const [username, setusername] = useRecoilState(UserNameState)
   return (
     <div >
       <Sidebar></Sidebar>
@@ -47,7 +50,9 @@ function Dashboard() {
               </div> 
           </div>
        <div className=" flex justify-end gap-2">
-        
+         <div className="p-2 bg-gray-300 rounded-lg mr-80 shadow-lg border font-bold font-serif">
+           {username}
+          </div> 
           <Button
             startIcon={<PlusIcon size={"lg"}></PlusIcon>}
             variant={"primary"}
@@ -81,7 +86,7 @@ function Dashboard() {
 
   
         <div className="flex gap-4 p-3 flex-wrap  ">
-            {content.map(({type,title,link,_id})=>(
+            {content.map(({type,title,link,_id,userId})=>(
               <Card
             type={type}
             link={link}
@@ -89,6 +94,8 @@ function Dashboard() {
             id={_id}
             setDeleteOpen={setDeleteOpen}
             setContentId = {setcontentId}
+            userId={userId}
+            
           ></Card> 
             ))}
         </div>

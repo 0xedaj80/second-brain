@@ -5,6 +5,9 @@ import { BACKEND_URL } from "../config";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { BrainIcon } from "../component/icons/BrainIcon";
+import { toast } from "react-toastify";
+import 'react-toastify/ReactToastify.css'
+
 export function Signin(){
     const usernameRef = useRef<HTMLInputElement>()
     const passwordRef = useRef<HTMLInputElement>()
@@ -18,7 +21,7 @@ export function Signin(){
           {      username,
                  password 
           }) 
-          alert("signed in success") 
+          toast("signed in success") 
           const jwt = response.data.token;
           localStorage.setItem("token",jwt)
           navigate("/dashboard")
