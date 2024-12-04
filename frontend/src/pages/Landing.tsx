@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import Footer from "../component/Footer";
-import Hero from "../component/Hero";
+// import Hero from "../component/Hero";
 import { Button } from "../component/ui/Button";
 import { IoLogOut } from "react-icons/io5";
 import { PiSignInBold } from "react-icons/pi";
@@ -39,7 +39,7 @@ export function Landing() {
           </div>
    
         <div className=" max-w-screen-2xl mx-auto px-4 sm:px-2 lg:px-10 py-12 md:py-24"> 
-      <div className=" flex justify-between items-start  grid grid-cols-12  bg-white">
+      <div className="  justify-between items-start  grid grid-cols-12  bg-white">
         <div className="ml-8 hidden md:block col-span-1 md:col-span-6 items-start mt-8 ">
             <div className=" items-start  text-left text-6xl font-serif font-bold ml-16 ">
                 
@@ -116,7 +116,7 @@ export function Landing() {
         </div>      
        
       </div> 
-      <div className="  flex rounded-lg p-20 shadow-lg gap-8 justify-center grid grid-cols-12  h-[500px] mb-2 rounded-md"> 
+      <div className="   rounded-lg p-20 shadow-lg gap-8 justify-center grid grid-cols-12  h-[500px] mb-2 "> 
         <div className="bg-yellow-100 rounded-lg hover:shadow-red-200 shadow-lg ml-20 md:col-span-6 col-span-12">
           
         <img src="/landing.png" alt="" />

@@ -6,12 +6,12 @@ import { Button } from "../component/ui/Button";
 import { CreateContentModal } from "../component/CreateContentModal";
 import { useState } from "react";
 import { useContent } from "../hooks/useContent";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 import axios from "axios";
 import { BACKEND_URL } from "../config";
 import { DeleteModal } from "../component/DeleteModal";
 import { HomeIcon } from "../component/icons/HomeIcon";
-import { useRecoilState } from "recoil";
+import {  useRecoilValue } from "recoil";
 import { UserNameState } from "../recoil/atoms/username";
 function Dashboard() {
    const [MoldalOpen, setModalOpen] = useState(false)
@@ -19,7 +19,7 @@ function Dashboard() {
    const [contentId, setcontentId] = useState("")  
    const content = useContent()
    const [sticky , setsticky] = useState(true)
-   const [username, setusername] = useRecoilState(UserNameState)
+   const username = useRecoilValue(UserNameState)
   return (
     <div className="dark:bg-inherit" >
       <Sidebar></Sidebar>

@@ -1,13 +1,13 @@
-import { PlusIcon } from "./icons/PlusIcon";
-import { ShareIcon } from "./icons/ShareIcon";
+// import { PlusIcon } from "./icons/PlusIcon";
+// import { ShareIcon } from "./icons/ShareIcon";
 import { LinkIcon } from "./icons/LinkIcon";
-import { YoutubeIcon } from "./icons/YoutubeIcon";
+// import { YoutubeIcon } from "./icons/YoutubeIcon";
 import { TwitterIcon } from "./icons/TwitterIcon";
 import { DeleteIcon } from "./icons/DeleteIcon";
 import { EditIcon } from "./icons/EditIcon";
 import { YoutubeRedIcon } from "./icons/YoutbeRedIcon";
-import { useEffect, useState } from "react";
-import { useRecoilState } from "recoil";
+import { useEffect,  } from "react";
+import {  useSetRecoilState } from "recoil";
 import { UserNameState } from "../recoil/atoms/username";
 interface CardProps{
      title:string;
@@ -22,7 +22,7 @@ interface CardProps{
 
 export function Card({title,link,type,id,setDeleteOpen,setContentId,userId,DateAdded}:CardProps) {
   
-   const [username, setusername] = useRecoilState(UserNameState)
+   const setusername = useSetRecoilState(UserNameState)
   useEffect(()=>{
      setusername(userId.username) 
   },[])
@@ -48,7 +48,7 @@ export function Card({title,link,type,id,setDeleteOpen,setContentId,userId,DateA
             <div  className="pr-2 text-gray-500   hover:bg-gray-200 cursor-pointer rounded-md p-1">
              <button onClick={()=>{
                   setContentId(id)
-                 setDeleteOpen((e) => (!e))
+                 setDeleteOpen((e:boolean) => (!e))
              }}>
               <DeleteIcon size={"lg"}></DeleteIcon>
               </button>  
