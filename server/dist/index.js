@@ -164,6 +164,9 @@ app.get("/api/v1/brain/:shareLink", (req, res) => __awaiter(void 0, void 0, void
         content: content
     });
 }));
+app.get("/", (req, res) => {
+    res.json({ msg: "hellow" });
+});
 function main() {
     return __awaiter(this, void 0, void 0, function* () {
         yield mongoose_1.default.connect(process.env.MONGO_URL);
