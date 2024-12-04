@@ -21,7 +21,7 @@ function Dashboard() {
    const [sticky , setsticky] = useState(true)
    const [username, setusername] = useRecoilState(UserNameState)
   return (
-    <div >
+    <div className="dark:bg-inherit" >
       <Sidebar></Sidebar>
       <div>
       <CreateContentModal setSticky={setsticky} open={MoldalOpen} onClose={()=>{
@@ -36,7 +36,7 @@ function Dashboard() {
 
      {/* make this component fixed so whilte scrolling cards it remain fixed home and two buttons and background too */}
     
-        <div className= {` flex justify-between border bg-white p-4 rounded-3xl ${sticky?" sticky":" "} border-gray-200 shadow-lg top-5 z-10 `}>
+        <div className= {` flex justify-between border  bg-white p-4 rounded-3xl ${sticky?" sticky":" "} border-gray-200 shadow-lg top-5 z-10 `}>
           <div className="font-bold text-3xl pl-3 font-serif mt-1">
             <div className="flex ">
               <div className="pr-2">
@@ -50,7 +50,7 @@ function Dashboard() {
               </div> 
           </div>
        <div className=" flex justify-end gap-2">
-         <div className="p-2 bg-gray-300 rounded-lg mr-80 shadow-lg border font-bold font-serif">
+         <div className="p-2 bg-gray-300  rounded-lg mr-80 shadow-lg border font-bold font-serif">
            {username}
           </div> 
           <Button
@@ -94,7 +94,8 @@ function Dashboard() {
             id={_id}
             setDeleteOpen={setDeleteOpen}
             setContentId = {setcontentId}
-            userId={userId}
+            userId={userId} 
+            DateAdded={new Date()}
             
           ></Card> 
             ))}

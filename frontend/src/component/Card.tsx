@@ -6,12 +6,13 @@ import { TwitterIcon } from "./icons/TwitterIcon";
 import { DeleteIcon } from "./icons/DeleteIcon";
 import { EditIcon } from "./icons/EditIcon";
 import { YoutubeRedIcon } from "./icons/YoutbeRedIcon";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
 import { UserNameState } from "../recoil/atoms/username";
 interface CardProps{
      title:string;
-     link:string;
+     link:string; 
+     DateAdded:Date;
      type:"twitter" | "youtube" ;
      id:string;
      setDeleteOpen:any;
@@ -19,12 +20,13 @@ interface CardProps{
      userId:any;
 }
 
-export function Card({title,link,type,id,setDeleteOpen,setContentId,userId}:CardProps) {
+export function Card({title,link,type,id,setDeleteOpen,setContentId,userId,DateAdded}:CardProps) {
   
    const [username, setusername] = useRecoilState(UserNameState)
   useEffect(()=>{
      setusername(userId.username) 
   },[])
+
   
   return (
     <div>
@@ -58,7 +60,9 @@ export function Card({title,link,type,id,setDeleteOpen,setContentId,userId}:Card
         </div>
       <div className="pt-4 "> 
 
-        {type === "youtube" && link ? (<iframe
+        {type === "youtube" && link ? (
+          <div> 
+          <iframe
            className="w-full rounded-md" 
           src={link.replace("watch","embed").replace("?v=","/")}
           title="YouTube video player"
@@ -66,7 +70,15 @@ export function Card({title,link,type,id,setDeleteOpen,setContentId,userId}:Card
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
           referrerPolicy="strict-origin-when-cross-origin"
           allowFullScreen
-        ></iframe> ) :null}
+        ></iframe> 
+        <div className="mt-4 text-sm text-gray-500">
+        Added on   {new Date(DateAdded).toLocaleDateString()}
+      </div> 
+      </div>
+      ) :null
+        
+         
+        }
 
        {type === "twitter" && <blockquote className="twitter-tweet">
        <a href={link.replace("x.com", "twitter.com")}></a> 

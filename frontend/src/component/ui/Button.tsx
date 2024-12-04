@@ -1,7 +1,7 @@
 
 
 export interface ButtonProps {
-   variant:"primary" | "secondary" | "danger";
+   variant:"primary" | "secondary" | "danger" | "nice";
    size:"sm" | "md" | "lg" ;
    text:string;
    startIcon?:any;

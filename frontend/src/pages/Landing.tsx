@@ -26,12 +26,12 @@ export function Landing() {
             </div>
              <div className="flex mr-8  items-center gap-4 ">
                 <div  className="" >
-                 <Button onClick={()=>{
+                 <Button startIcon={<IoLogOut></IoLogOut>} onClick={()=>{
                    navigate("/Signup")
                  }} size="md" variant={"nice"} text={"Signup"}></Button> 
                   </div>  
               <div>
-                 <Button onClick={()=>{
+                 <Button startIcon={<PiSignInBold></PiSignInBold>} onClick={()=>{
                   navigate("/Signin")
                  }} size="md" variant={"nice"} text={"login"}></Button> 
                   </div>  
