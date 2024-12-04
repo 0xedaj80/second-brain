@@ -1,18 +1,20 @@
 import { CloseIcon } from "./icons/CloseIcon";
 import { Button } from "./ui/Button";
-import { Input } from "./Input";
-import { useRef, useState } from "react";
+// import { Input } from "./Input";
+// import { ReactHTMLElement, useRef, useState } from "react";
 import axios from "axios";
 import { BACKEND_URL } from "../config";
+import { toast } from "react-toastify";
 
-
-
-enum ContentType {
-    Youtube = "youtube",
-     Twitter = "twitter"
+interface delProps {
+   open:boolean;
+   onClose:()=>void;
+   id:string;
+   setSticky:any;
 }
 
-export function DeleteModal({open, onClose,id, setSticky}){
+
+export function DeleteModal({open, onClose,id, setSticky}:delProps){
     
     async function content(){
         
@@ -25,6 +27,7 @@ export function DeleteModal({open, onClose,id, setSticky}){
         },
       })
        const msg = response.data.msg;
+       toast(msg)
     
     //   alert(id)  
     setSticky(true)

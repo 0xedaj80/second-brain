@@ -10,9 +10,14 @@ import { BACKEND_URL } from "../config";
 enum ContentType {
     Youtube = "youtube",
      Twitter = "twitter"
+} 
+interface contProps{
+    open:boolean;
+    onClose:()=>void;
+    setSticky:any;
 }
 
-export function CreateContentModal({open, onClose, setSticky}){
+export function CreateContentModal({open, onClose, setSticky}:contProps){
    const linkRef = useRef<HTMLInputElement>()
    const titleRef = useRef<HTMLInputElement>()
    const [type, settype] = useState(ContentType.Youtube);
