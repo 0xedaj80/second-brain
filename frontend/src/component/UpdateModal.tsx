@@ -19,6 +19,7 @@ interface contProps{
     setSticky:any;
 }
 
+
 export function UpdateModal({open, onClose, setSticky,id}:contProps){
    const linkRef = useRef<HTMLInputElement>()
    const titleRef = useRef<HTMLInputElement>()
@@ -28,9 +29,9 @@ export function UpdateModal({open, onClose, setSticky,id}:contProps){
    const data = useContent()
 
     async function content(){
-       const link = linkRef.current?.value;
-       const title = titleRef.current?.value; 
-       alert("something")
+    //    const link = linkRef.current?.value;
+    //    const title = titleRef.current?.value; 
+    //    alert("something")
        await axios.post(`${BACKEND_URL}/api/v1/content/update`,{
          id:id,
          title:titleValue,
@@ -89,7 +90,8 @@ useEffect(()=>{
                     <div className="justify-center flex p-2 ">
                         <h1>Update details</h1>
                     </div>
-                     {/* {JSON.stringify(data[0].link )}  */}
+                     {/* {JSON.stringify(data[0]._id )}  */}
+                     
                     <Input value={titleValue} onChange={(e:any)=>{setTitleValue(e.target.value)}} reference={titleRef} placeholder={"Title"}></Input>
                     <Input value={linkValue} onChange={(e:any)=>{setLinkValue(e.target.value)}} reference={linkRef} placeholder={"Link"}></Input>
                  </div> 
