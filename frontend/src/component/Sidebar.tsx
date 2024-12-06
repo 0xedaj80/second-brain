@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 import { BrainIcon } from "./icons/BrainIcon";
 import { HomeIcon } from "./icons/HomeIcon";
 import { LinkIcon } from "./icons/LinkIcon";
@@ -36,7 +36,7 @@ import { refreshState } from "../recoil/atoms/loginInfo";
 // }
 
 export function Sidebar(){ 
-    const navigate = useNavigate() 
+    // const navigate = useNavigate() 
     const setrefe  = useSetRecoilState(refreshState)
     return (
         <div className="w-72 h-screen bg-white border-r fixed top-0 left-0 pl-8 flex flex-col justify-between">
@@ -66,9 +66,11 @@ export function Sidebar(){
                 
                 <Button onClick={()=>{
                      localStorage.removeItem("token")
+                    //  toast.error("signed out")
+                     setrefe((e)=>(!e)) 
                      toast.error("signed out")
-                     setrefe((e)=>(!e))
-                     navigate("/landing")
+                    //  navigate("/landing") 
+                     window.location.href = "/landing"
                 }} variant="danger" text="Log-out" startIcon={<RiLogoutBoxRLine></RiLogoutBoxRLine>} size="md"></Button>
             </div>
             

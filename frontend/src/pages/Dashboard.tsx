@@ -15,6 +15,8 @@ import {  useRecoilValue } from "recoil";
 import { UserNameState } from "../recoil/atoms/username";
 import { UpdateModal } from "../component/UpdateModal";
 import { userState } from "../recoil/atoms/loginInfo";
+import { RiLogoutBoxRLine } from "react-icons/ri";
+import { toast } from "react-toastify";
 function Dashboard() {
    const [MoldalOpen, setModalOpen] = useState(false)
    const [deleteOpen, setDeleteOpen] = useState (false)
@@ -105,6 +107,16 @@ function Dashboard() {
             text={"Share Brain"}
             size={"md"}
           ></Button>
+          <div className="md:hidden">
+          <Button onClick={()=>{
+                     localStorage.removeItem("token")
+                    //  toast.error("signed out")
+                    //  setrefe((e)=>(!e)) 
+                     toast.error("signed out")
+                    //  navigate("/landing") 
+                     window.location.href = "/landing"
+                }} variant="danger" text="Log-out" startIcon={<RiLogoutBoxRLine></RiLogoutBoxRLine>} size="md"></Button>
+  </div>
   </div>
   </div>
  

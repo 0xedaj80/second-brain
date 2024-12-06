@@ -12,7 +12,7 @@ export interface ButtonProps {
 const VariantStyles = {
     "primary":"bg-purple-600 rounded-lg text-white hover:bg-blue-600",
     "secondary":"bg-purple-300 rounded-lg text-purple-600 hover:bg-blue-300",
-    "danger":"bg-red-300 text-black rounded-full w-[150px] hover:bg-red-400  transition-colors font-serif ",
+    "danger":"bg-red-300 text-black rounded-lg w-[150px] hover:bg-red-400  transition-colors font-serif ",
 
     "nice":"bg-purple-300   border-black text-black  rounded-full w-[150px] hover:bg-green-200  transition-colors font-serif ",
 }
