@@ -95,6 +95,24 @@ app.post("/api/v1/content/update", auth_1.authenticatejwt, (req, res) => __await
         msg: "content updated"
     });
 }));
+app.get("/api/v1/me", auth_1.authenticatejwt, (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const userId = req.userId;
+    try {
+        if (userId) {
+            const details = yield db_1.userModel.findOne({
+                _id: userId,
+            });
+            res.json({
+                username: details === null || details === void 0 ? void 0 : details.username
+            });
+        }
+    }
+    catch (error) {
+        res.json({
+            error
+        });
+    }
+}));
 app.get("/api/v1/content", auth_1.authenticatejwt, (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     // @ts-ignore
     const userId = req.userId;

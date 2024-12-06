@@ -7,11 +7,16 @@ import { useNavigate } from "react-router-dom";
 import { BrainIcon } from "../component/icons/BrainIcon";
 import { toast } from "react-toastify";
 import 'react-toastify/ReactToastify.css'
+import { useRecoilValue, useSetRecoilState } from "recoil";
+import {  refreshState, userState } from "../recoil/atoms/loginInfo";
+import Dashboard from "./Dashboard";
 
 export function Signin(){
+    const user = useRecoilValue(userState)
     const usernameRef = useRef<HTMLInputElement>()
     const passwordRef = useRef<HTMLInputElement>()
     const navigate = useNavigate()
+    const setrefe = useSetRecoilState(refreshState)
 
     async function signin(){
          const username = usernameRef.current?.value;  
@@ -24,13 +29,20 @@ export function Signin(){
           toast("signed in success") 
           const jwt = response.data.token;
           localStorage.setItem("token",jwt)
+          setrefe((e)=>(!e))
           navigate("/dashboard")
     }
+   
+    if(user.userEmail){
+     return (
+      <Dashboard></Dashboard>
+     )
 
+    }
      return (
         <div className="h-screen w-screen bg-gray-100 flex justify-center flex-col items-center">
                 
-               <div className="bg-white rounded-xl shadow-lg border p-3 mb-10 min-w-48 p-2 ">
+               <div className="bg-white rounded-xl shadow-lg border p-3 mb-10 min-w-48 ">
                       
                 <div className="flex text-2xl font-bold bg-white-200  font-serif text-black  items-center">
                     <div className="pr-2"> 
@@ -55,4 +67,5 @@ export function Signin(){
                 </div> 
         </div>
      )
+     
 }

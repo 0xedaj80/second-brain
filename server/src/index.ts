@@ -106,6 +106,33 @@ app.post("/api/v1/content/update", authenticatejwt, async (req,res)=>{
 
 })
 
+app.get("/api/v1/me", authenticatejwt, async (req,res)=>{
+       const userId = req.userId;
+       
+       try {
+       if(userId){
+
+        const details = await userModel.findOne({
+            _id:userId,
+       })
+
+        res.json({
+           username:details?.username 
+       }) 
+       } 
+       } catch (error) {
+          res.json({
+             error
+          }) 
+       }
+       
+       
+
+       
+
+       
+})
+
 app.get("/api/v1/content" , authenticatejwt,  async (req,res)=>{ 
     
     // @ts-ignore

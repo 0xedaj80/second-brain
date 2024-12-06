@@ -6,11 +6,24 @@ import { IoLogOut } from "react-icons/io5";
 import { PiSignInBold } from "react-icons/pi";
 import { BookMarked, BrainCircuit, Search } from "lucide-react";
 import { BrainIcon } from "../component/icons/BrainIcon"; 
+import { useRecoilValue } from "recoil";
+import { userState } from "../recoil/atoms/loginInfo";
+import Dashboard from "./Dashboard";
 
 export function Landing() {
  const navigate = useNavigate();
-
+ const user = useRecoilValue(userState)
+  
+ if(user.userEmail){
+  console.log(user.userEmail)
+return (
+   
+  <Dashboard></Dashboard>
+  
+) 
+ }
   return (
+
     <div className="">
           <div className="bg-white flex  justify-between shadow-2xl sticky top-0 left-0  "> 
             <div className="flex  gap-2 p-4 ml-3 items-center ">
@@ -24,7 +37,7 @@ export function Landing() {
 
 
             </div>
-             <div className="flex mr-8  items-center gap-4 ">
+             <div className=" grid p-2 md:p-0 md:flex  mr-8  items-center gap-4 ">
                 <div  className="" >
                  <Button startIcon={<IoLogOut></IoLogOut>} onClick={()=>{
                    navigate("/Signup")

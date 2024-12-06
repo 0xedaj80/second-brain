@@ -32,7 +32,7 @@ export function Card({title,link,type,id,setDeleteOpen, setUpdateOpen, setSticky
   
   return (
     <div>
-      <div className=" p-4 max-w-72 text-md border  bg-white rounded-md shadow-md border-gray-200">
+      <div className=" p-4 max-w-72 text-md border  bg-white rounded-lg  shadow-lg  hover:shadow-red-500 border-gray-200">
         <div className={"flex justify-between"}>
           <div className="flex items-center ">
             <div className="text-gray-500 pr-2 p-1 hover:bg-gray-200 cursor-pointer rounded-md  ">

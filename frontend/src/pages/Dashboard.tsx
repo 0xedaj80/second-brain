@@ -14,6 +14,7 @@ import { HomeIcon } from "../component/icons/HomeIcon";
 import {  useRecoilValue } from "recoil";
 import { UserNameState } from "../recoil/atoms/username";
 import { UpdateModal } from "../component/UpdateModal";
+import { userState } from "../recoil/atoms/loginInfo";
 function Dashboard() {
    const [MoldalOpen, setModalOpen] = useState(false)
    const [deleteOpen, setDeleteOpen] = useState (false)
@@ -22,6 +23,10 @@ function Dashboard() {
    const content = useContent()
    const [sticky , setsticky] = useState(true)
    const username = useRecoilValue(UserNameState)
+
+   const user = useRecoilValue(userState)
+  
+   if(user.userEmail){
   return (
     <div className="dark:bg-black" >
       <div className="hidden md:block">
@@ -43,12 +48,19 @@ function Dashboard() {
          setsticky(true)
       }}  ></UpdateModal>
 
-      <div className=" md:ml-72 min-h-screen bg-gray-100 border-2 p-4">
 
+
+   {/* i want that there should be a backgournd image in below div with gray-100 color fading it */}
+ 
+      <div className=" md:ml-72 min-h-screen  bg-cover bg-gray-200 border-2 p-4  " style={{
+       backgroundImage: "url('/random.jpg')",
+       backgroundBlendMode: "overlay",
+       backgroundAttachment: "fixed"
+     }}> 
      {/* make this component fixed so whilte scrolling cards it remain fixed home and two buttons and background too */}
     
         <div className= {` flex justify-between border  bg-white p-4 rounded-3xl ${sticky?" sticky":" "} border-gray-200 shadow-lg top-5 z-10 `}>
-          <div className="font-bold text-3xl pl-3 font-serif mt-1">
+          <div className="font-bold hidden md:block text-3xl pl-3 font-serif mt-1">
             <div className="flex ">
               <div className="pr-2">
                 
@@ -60,8 +72,8 @@ function Dashboard() {
                 </div> 
               </div> 
           </div>
-       <div className=" flex justify-end gap-2 ">
-         <div className="p-2 bg-gray-300  rounded-lg mr-80 shadow-lg border font-bold font-serif">
+       <div className=" grid md:flex md:justify-end  gap-2  ">
+         <div className="p-2 bg-gray-300  rounded-lg shadow-lg border font-bold font-serif">
            {username}
           </div> 
           
@@ -95,8 +107,7 @@ function Dashboard() {
           ></Button>
   </div>
   </div>
-
-  
+ 
         <div className="flex gap-4 p-3 flex-wrap  ">
             {content.map(({type,title,link,_id,userId})=>(
               <Card
@@ -118,6 +129,13 @@ function Dashboard() {
     </div>
     </div>
   );
+}
+
+return (
+  <div className="text-4xl items-center ">
+    you need to login first
+  </div>
+)
 }
 
 

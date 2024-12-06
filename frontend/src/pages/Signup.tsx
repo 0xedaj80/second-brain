@@ -5,9 +5,13 @@ import {BACKEND_URL } from "../config"
 import { BrainIcon } from "../component/icons/BrainIcon";
 import axios from "axios"
 import { useNavigate } from "react-router-dom";
+import { useRecoilValue } from "recoil";
+import { userState } from "../recoil/atoms/loginInfo";
+import Dashboard from "./Dashboard";
 export function Signup(){ 
     const usernameRef = useRef<HTMLInputElement>()
     const passwordRef = useRef<HTMLInputElement>()
+    const user = useRecoilValue(userState)
     const navigate = useNavigate() 
 
     async function signup(){
@@ -38,11 +42,16 @@ export function Signup(){
                 
     //     </div>
     //  )
-
+ 
+    if(user.userEmail){
+        return(
+            <Dashboard></Dashboard>
+        ) 
+    }
      return (
         <div className="h-screen w-screen bg-gray-100 flex justify-center flex-col items-center">
                 
-               <div className="bg-white rounded-xl shadow-lg border p-3 mb-10 min-w-48 p-2 ">
+               <div className="bg-white rounded-xl shadow-lg border p-3 mb-10 min-w-48 ">
                       
                 <div className="flex text-2xl font-bold bg-white-200  font-serif text-black  items-center">
                     <div className="pr-2"> 
@@ -67,4 +76,6 @@ export function Signup(){
                 </div> 
         </div>
      )
+    
+   
 }

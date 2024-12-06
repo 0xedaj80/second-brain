@@ -9,6 +9,8 @@ import { SidebarItem } from "./Sidebaritem";
 import { Button } from "./ui/Button";
 import { RiLogoutBoxRLine } from "react-icons/ri";
 import { toast } from "react-toastify";
+import {  useSetRecoilState } from "recoil";
+import { refreshState } from "../recoil/atoms/loginInfo";
 
 
 // export function Sidebar(){ 
@@ -35,6 +37,7 @@ import { toast } from "react-toastify";
 
 export function Sidebar(){ 
     const navigate = useNavigate() 
+    const setrefe  = useSetRecoilState(refreshState)
     return (
         <div className="w-72 h-screen bg-white border-r fixed top-0 left-0 pl-8 flex flex-col justify-between">
             {/* Header Section */}
@@ -64,7 +67,8 @@ export function Sidebar(){
                 <Button onClick={()=>{
                      localStorage.removeItem("token")
                      toast.error("signed out")
-                     navigate("/signin")
+                     setrefe((e)=>(!e))
+                     navigate("/landing")
                 }} variant="danger" text="Log-out" startIcon={<RiLogoutBoxRLine></RiLogoutBoxRLine>} size="md"></Button>
             </div>
             
