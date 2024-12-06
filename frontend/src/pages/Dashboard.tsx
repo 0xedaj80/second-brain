@@ -13,16 +13,22 @@ import { DeleteModal } from "../component/DeleteModal";
 import { HomeIcon } from "../component/icons/HomeIcon";
 import {  useRecoilValue } from "recoil";
 import { UserNameState } from "../recoil/atoms/username";
+import { UpdateModal } from "../component/UpdateModal";
 function Dashboard() {
    const [MoldalOpen, setModalOpen] = useState(false)
    const [deleteOpen, setDeleteOpen] = useState (false)
+   const [UpdateOpen, setUpdateOpen] = useState (false)
    const [contentId, setcontentId] = useState("")  
    const content = useContent()
    const [sticky , setsticky] = useState(true)
    const username = useRecoilValue(UserNameState)
   return (
-    <div className="dark:bg-inherit" >
+    <div className="dark:bg-black" >
+      <div className="hidden md:block">
+        
+      
       <Sidebar></Sidebar>
+     </div>
       <div>
       <CreateContentModal setSticky={setsticky} open={MoldalOpen} onClose={()=>{
          setModalOpen(false) 
@@ -31,8 +37,13 @@ function Dashboard() {
       <DeleteModal setSticky={setsticky} id={contentId} open={deleteOpen} onClose={()=>{
           setDeleteOpen(false)
           setsticky(true)
-      }}></DeleteModal>   
-      <div className=" ml-72 min-h-screen bg-gray-100 border-2 p-4">
+      }}></DeleteModal> 
+      <UpdateModal setSticky={setsticky} open={UpdateOpen} id={contentId} onClose={()=>{
+         setUpdateOpen(false);
+         setsticky(true)
+      }}  ></UpdateModal>
+
+      <div className=" md:ml-72 min-h-screen bg-gray-100 border-2 p-4">
 
      {/* make this component fixed so whilte scrolling cards it remain fixed home and two buttons and background too */}
     
@@ -49,10 +60,11 @@ function Dashboard() {
                 </div> 
               </div> 
           </div>
-       <div className=" flex justify-end gap-2">
+       <div className=" flex justify-end gap-2 ">
          <div className="p-2 bg-gray-300  rounded-lg mr-80 shadow-lg border font-bold font-serif">
            {username}
           </div> 
+          
           <Button
             startIcon={<PlusIcon size={"lg"}></PlusIcon>}
             variant={"primary"}
@@ -94,6 +106,8 @@ function Dashboard() {
             id={_id}
             setDeleteOpen={setDeleteOpen}
             setContentId = {setcontentId}
+            setUpdateOpen={setUpdateOpen}
+            setSticky={setsticky}
             userId={userId} 
             DateAdded={new Date()}
             
@@ -108,3 +122,6 @@ function Dashboard() {
 
 
 export default Dashboard;
+
+
+

@@ -78,6 +78,23 @@ app.post("/api/v1/content", auth_1.authenticatejwt, (req, res) => __awaiter(void
         msg: "content added not yet babe"
     });
 }));
+app.post("/api/v1/content/update", auth_1.authenticatejwt, (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const userId = req.body.id;
+    // await contentModel.create({
+    //      link,
+    //      type,
+    //      title:req.body.title,
+    //     //  @ts-ignore
+    //      userId:req.userId,
+    //      tags:[]
+    // })
+    console.log("you reached to backend");
+    const content = yield db_1.contentModel.findByIdAndUpdate(userId, req.body, { new: true });
+    res.json({
+        content: content,
+        msg: "content updated"
+    });
+}));
 app.get("/api/v1/content", auth_1.authenticatejwt, (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     // @ts-ignore
     const userId = req.userId;

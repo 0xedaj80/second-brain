@@ -82,6 +82,29 @@ app.post("/api/v1/content", authenticatejwt, async (req,res)=>{
     }) 
 
 })
+app.post("/api/v1/content/update", authenticatejwt, async (req,res)=>{
+
+     const userId = req.body.id;
+      
+    // await contentModel.create({
+    //      link,
+    //      type,
+    //      title:req.body.title,
+    //     //  @ts-ignore
+    //      userId:req.userId,
+    //      tags:[]
+    // })
+    console.log("you reached to backend") 
+    const content = await contentModel.findByIdAndUpdate(
+         userId, req.body, {new:true})
+    
+    
+    res.json({ 
+        content:content,
+         msg:"content updated"
+    }) 
+
+})
 
 app.get("/api/v1/content" , authenticatejwt,  async (req,res)=>{ 
     
@@ -150,6 +173,8 @@ app.post("/api/v1/brain/share", authenticatejwt, async (req,res)=>{
         })
     } 
 })
+
+
 
 app.get("/api/v1/brain/:shareLink", async (req,res)=>{
      const hash = req.params.shareLink;

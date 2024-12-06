@@ -17,10 +17,12 @@ interface CardProps{
      id:string;
      setDeleteOpen:any;
      setContentId:any;
+     setUpdateOpen:any;
      userId:any;
+     setSticky:any;
 }
 
-export function Card({title,link,type,id,setDeleteOpen,setContentId,userId,DateAdded}:CardProps) {
+export function Card({title,link,type,id,setDeleteOpen, setUpdateOpen, setSticky, setContentId,userId,DateAdded}:CardProps) {
   
    const setusername = useSetRecoilState(UserNameState)
   useEffect(()=>{
@@ -48,13 +50,22 @@ export function Card({title,link,type,id,setDeleteOpen,setContentId,userId,DateA
             <div  className="pr-2 text-gray-500   hover:bg-gray-200 cursor-pointer rounded-md p-1">
              <button onClick={()=>{
                   setContentId(id)
-                 setDeleteOpen((e:boolean) => (!e))
+                 setDeleteOpen((e:boolean) => (!e)) 
+                 setSticky((e:boolean)=>(!e))
              }}>
               <DeleteIcon size={"lg"}></DeleteIcon>
               </button>  
             </div>
             <div className="pr-2 text-gray-500  hover:bg-gray-200 cursor-pointer rounded-md p-1">
+              <button onClick={()=>{
+                  setContentId(id)
+                  setUpdateOpen((e:boolean)=>(!e))
+                  
+                 setSticky((e:boolean)=>(!e))
+            
+              }}>  
                <EditIcon size={"lg"}></EditIcon>
+            </button>
             </div>
           </div>
         </div>
