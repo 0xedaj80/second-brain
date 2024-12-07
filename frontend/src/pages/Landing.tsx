@@ -26,7 +26,7 @@ return (
 
     <div className="">
           <div className="bg-white flex  justify-between shadow-2xl sticky top-0 left-0  "> 
-            <div className="flex  gap-2 p-4 ml-3 items-center ">
+            <div className="flex gap-2 p-4 ml-3 items-center ">
 
              <div  className="cursor-pointer" >
               <BrainIcon></BrainIcon> 

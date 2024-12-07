@@ -79,7 +79,9 @@ export function Sidebar(){
                      localStorage.removeItem("token")
                     //  toast.error("signed out")
                      setrefe((e)=>(!e)) 
-                     toast.error("signed out")
+                     toast.error("signed out", {
+                        theme: "colored"
+                      })
                     //  navigate("/landing") 
                      window.location.href = "/landing"
                 }} variant="danger" text="Log-out" startIcon={<RiLogoutBoxRLine></RiLogoutBoxRLine>} size="md"></Button>

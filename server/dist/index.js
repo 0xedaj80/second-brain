@@ -21,9 +21,12 @@ const db_1 = require("./db/db");
 const config_1 = require("./config");
 const auth_1 = require("./middleware/auth");
 const cors_1 = __importDefault(require("cors"));
+// import {z} from "zod"
 const app = (0, express_1.default)();
 app.use(express_1.default.json());
 app.use((0, cors_1.default)());
+// const SignupSchema = z.object({
+// })
 app.post("/api/v1/signup", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const username = req.body.username;
     const password = req.body.password;
@@ -54,7 +57,8 @@ app.post("/api/v1/signin", (req, res) => __awaiter(void 0, void 0, void 0, funct
             id: existingUser._id
         }, config_1.jwt_password);
         res.json({
-            token
+            token,
+            msg: "signin success"
         });
     }
     else {

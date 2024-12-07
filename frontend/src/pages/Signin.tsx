@@ -21,16 +21,31 @@ export function Signin(){
     async function signin(){
          const username = usernameRef.current?.value;  
          const password = passwordRef.current?.value;
-          console.log() 
-        const response = await axios.post(BACKEND_URL + "/api/v1/signin" , 
-          {      username,
-                 password 
-          }) 
-          toast("signed in success") 
+       
+         try {
+          const response = await axios.post(
+              BACKEND_URL + "/api/v1/signin",
+              { username, password }
+          );
+  
           const jwt = response.data.token;
-          localStorage.setItem("token",jwt)
-          setrefe((e)=>(!e))
-          navigate("/dashboard")
+          const msg = response.data.msg;
+          toast.success(msg, {theme: "colored"});
+          localStorage.setItem("token", jwt);
+          setrefe((e) => !e);
+          navigate("/dashboard");
+      } catch (error) {
+          // If there is an error, handle it here
+          if (axios.isAxiosError(error)) {
+              // Extract the error message from the backend
+              const errorMsg = error.response?.data?.msg || "An error occurred. Please try again.";
+              toast.error(errorMsg); // Error toast
+          } else {
+              // Generic fallback for non-Axios errors
+              toast.error("Something went wrong. Please try again later.");
+          }
+      }
+   
     }
    
     if(user.userEmail){

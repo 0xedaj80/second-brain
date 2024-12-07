@@ -8,12 +8,15 @@ import { contentModel, linkModel, userModel } from "./db/db";
 import { jwt_password } from "./config";
 import { authenticatejwt } from "./middleware/auth";
 import cors from "cors"
-
+// import {z} from "zod"
 
 const app = express();
 app.use(express.json());
 app.use(cors())
 
+// const SignupSchema = z.object({
+     
+// })
 
 app.post("/api/v1/signup", async (req,res)=>{
 
@@ -55,9 +58,11 @@ app.post("/api/v1/signin", async (req, res)=>{
          }, jwt_password ) 
 
          res.json({
-             token
+             token,
+             msg:"signin success"
          })
      }else{
+          
           res.status(403).json({
              msg:"incorrect credentials "
           }) 

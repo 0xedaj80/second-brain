@@ -7,7 +7,7 @@ const Footer = () => {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-8 mb-12">
           <div className="col-span-1 sm:col-span-2 md:col-span-2">
-            <h2 className=" flex   gap-2  text-xl font-bold text-center sm:text-left">
+            <h2 className=" flex justify-center md:justify-normal  gap-2  text-xl font-bold text-center sm:text-left">
               <BrainIcon ></BrainIcon>
               <div className="mt-1">                
                <span className="  text-blue-600">Super</span>Memory
