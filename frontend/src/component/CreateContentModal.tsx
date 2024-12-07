@@ -4,6 +4,8 @@ import { Input } from "./Input";
 import { useRef, useState } from "react";
 import axios from "axios";
 import { BACKEND_URL } from "../config";
+import { useSetRecoilState } from "recoil";
+import { refreshState } from "../recoil/atoms/loginInfo";
 
 
 
@@ -21,7 +23,7 @@ export function CreateContentModal({open, onClose, setSticky}:contProps){
    const linkRef = useRef<HTMLInputElement>()
    const titleRef = useRef<HTMLInputElement>()
    const [type, settype] = useState(ContentType.Youtube);
-
+   const setrefe = useSetRecoilState(refreshState)
     async function content(){
        const link = linkRef.current?.value;
        const title = titleRef.current?.value;
@@ -34,6 +36,8 @@ export function CreateContentModal({open, onClose, setSticky}:contProps){
              "Authorization":localStorage.getItem("token")
           } 
        })
+       
+       setrefe((e)=>(!e))
        setSticky(true)
         
        onClose();

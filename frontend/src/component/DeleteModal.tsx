@@ -5,6 +5,8 @@ import { Button } from "./ui/Button";
 import axios from "axios";
 import { BACKEND_URL } from "../config";
 import { toast } from "react-toastify";
+import { useSetRecoilState } from "recoil";
+import { refreshState } from "../recoil/atoms/loginInfo";
 
 interface delProps {
    open:boolean;
@@ -15,6 +17,7 @@ interface delProps {
 
 
 export function DeleteModal({open, onClose,id, setSticky}:delProps){
+    const setrefe = useSetRecoilState(refreshState)
     
     async function content(){
         
@@ -28,7 +31,7 @@ export function DeleteModal({open, onClose,id, setSticky}:delProps){
       })
        const msg = response.data.msg;
        toast(msg)
-    
+      setrefe((e)=>(!e)) 
     //   alert(id)  
     setSticky(true)
        onClose();

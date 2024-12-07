@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { BACKEND_URL } from "../config";
 import axios from "axios";
+import { useRecoilValue } from "recoil";
+import { refreshState } from "../recoil/atoms/loginInfo";
 
 
 interface Content {
@@ -12,8 +14,9 @@ interface Content {
    }
    
 export function useContent(){
+     const refe = useRecoilValue(refreshState)
      const [Content, setContent] = useState<Content[]>([])
-   console.log("here")
+   console.log("inside usecontent")
      async function getContent(){
          const response = await axios.get(`${BACKEND_URL}/api/v1/content`,{ 
             headers:{
@@ -26,7 +29,7 @@ export function useContent(){
 
      useEffect(()=>{
          getContent()  
-      },[])
+      },[refe])
      return Content;
      
      
