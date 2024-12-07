@@ -13,3 +13,8 @@ export const refreshState= atom({
     key:"refreshState",
     default:true
 })
+
+export const setTag= atom({
+    key:"setTag", 
+    default:""
+})

@@ -10,7 +10,7 @@ import { Button } from "./ui/Button";
 import { RiLogoutBoxRLine } from "react-icons/ri";
 import { toast } from "react-toastify";
 import {  useSetRecoilState } from "recoil";
-import { refreshState } from "../recoil/atoms/loginInfo";
+import { refreshState, setTag } from "../recoil/atoms/loginInfo";
 
 
 // export function Sidebar(){ 
@@ -38,6 +38,7 @@ import { refreshState } from "../recoil/atoms/loginInfo";
 export function Sidebar(){ 
     // const navigate = useNavigate() 
     const setrefe  = useSetRecoilState(refreshState)
+    const settagcomp = useSetRecoilState(setTag)
     return (
         <div className="w-72 h-screen bg-white border-r fixed top-0 left-0 pl-8 flex flex-col justify-between">
             {/* Header Section */}
@@ -53,11 +54,21 @@ export function Sidebar(){
                 </div>
                 {/* Sidebar Items */}
                 <div className="pt-6"> 
-                    <SidebarItem icon={<HomeIcon size="lgg"></HomeIcon>} text="Home"></SidebarItem>
-                    <SidebarItem icon={<TwitterIcon size="lgg"></TwitterIcon>} text="Twitter"></SidebarItem>
-                    <SidebarItem icon={<YoutubeIcon size="lgg"></YoutubeIcon>} text="YouTube"></SidebarItem>
-                    <SidebarItem icon={<NotesIcon size="lgg"></NotesIcon>} text="All Notes"></SidebarItem>
-                <SidebarItem icon={<LinkIcon size="lgg"></LinkIcon>} text="all Links"></SidebarItem>
+                    <SidebarItem onClick={()=>{
+                          settagcomp("")
+                    }} icon={<HomeIcon size="lgg"></HomeIcon>} text="Home"></SidebarItem>
+                    <SidebarItem onClick={()=>{
+                          settagcomp("twitter")
+                    }} icon={<TwitterIcon size="lgg"></TwitterIcon>} text="Twitter"></SidebarItem>
+                    <SidebarItem  onClick={()=>{
+                          settagcomp("youtube")
+                    }}icon={<YoutubeIcon size="lgg"></YoutubeIcon>} text="YouTube"></SidebarItem>
+                    <SidebarItem  onClick={()=>{
+                          settagcomp("Notes")
+                    }}icon={<NotesIcon size="lgg"></NotesIcon>} text="All Notes"></SidebarItem>
+                <SidebarItem  onClick={()=>{
+                          settagcomp("Links")
+                    }}icon={<LinkIcon size="lgg"></LinkIcon>} text="all Links"></SidebarItem>
                 </div>
             </div>
             
