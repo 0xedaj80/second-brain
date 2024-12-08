@@ -38,7 +38,8 @@ export function UpdateModal({open, onClose, setSticky,id}:contProps){
        await axios.post(`${BACKEND_URL}/api/v1/content/update`,{
          id:id,
          title:titleValue,
-         link:linkValue
+         link:linkValue,
+         type:type
        },{
           headers:{
              "Authorization":localStorage.getItem("token")
