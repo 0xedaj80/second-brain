@@ -40,7 +40,7 @@ export function DeleteModal({open, onClose,id, setSticky}:delProps){
    
      return (
         <div>
-        { open && <div className="w-screen h-screen bg-black  fixed top-0 left-0 bg-opacity-60 flex justify-center"> 
+        { open && <div onClick={onClose} className="w-screen h-screen bg-black backdrop-blur-sm  fixed top-0 left-0 bg-opacity-60 flex justify-center"> 
                   <div className="flex  flex-col justify-center"> 
              <span className="bg-white opacity-100 p-4 rounded-lg">
                 <div className="flex justify-end">
