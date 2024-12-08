@@ -82,7 +82,7 @@ useEffect(()=>{
         <div>
         
         { open && <div onClick={onClose} className="w-screen backdrop-blur-sm  h-screen bg-black  fixed top-0 left-0 bg-opacity-60 flex justify-center"> 
-                  <div className="flex  flex-col justify-center">  
+                  <div   onClick={(e) => e.stopPropagation()} className="flex  flex-col justify-center">  
              <span className="bg-white opacity-100 p-4 rounded-lg">
                  <div className="flex justify-end"> 
                     <div onClick={onClose} className="hover:bg-gray-100 rounded cursor-pointer">

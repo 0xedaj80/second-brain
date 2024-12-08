@@ -30,7 +30,7 @@ export function DeleteModal({open, onClose,id, setSticky}:delProps){
         },
       })
        const msg = response.data.msg;
-       toast(msg)
+       toast.success(msg)
       setrefe((e)=>(!e)) 
     //   alert(id)  
     setSticky(true)
@@ -41,7 +41,7 @@ export function DeleteModal({open, onClose,id, setSticky}:delProps){
      return (
         <div>
         { open && <div onClick={onClose} className="w-screen h-screen bg-black backdrop-blur-sm  fixed top-0 left-0 bg-opacity-60 flex justify-center"> 
-                  <div className="flex  flex-col justify-center"> 
+                  <div   onClick={(e) => e.stopPropagation()} className="flex  flex-col justify-center"> 
              <span className="bg-white opacity-100 p-4 rounded-lg">
                 <div className="flex justify-end">
                      <div onClick={onClose} className="hover:bg-gray-100 rounded cursor-pointer">
